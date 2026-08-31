@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #F6F1E4;
+  --green: #1F3B2C;
+  --gold: #A9822B;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--paper);
+  color: #211F17;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(169, 130, 43, 0.28);
+  color: #211F17;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 59, 44, 0.22);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 59, 44, 0.38);
+}
+
+/* Focus ring, accessible + on-brand */
+a, button, input, select, textarea, [tabindex] {
+  font-family: inherit;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #A9822B;
+  outline-offset: 2px;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #A9822B !important;
+  box-shadow: 0 0 0 3px rgba(169, 130, 43, 0.16);
+}
+
+/* Motion */
+.spin {
+  animation: spin 0.85s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+.pop-in {
+  animation: popIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #ECE4CE 25%, #F5EEDB 37%, #ECE4CE 63%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+/* Interactive surfaces */
+.card-hover {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(23,35,26,0.14), 0 4px 10px rgba(23,35,26,0.06);
+  border-color: #CDBE8E !important;
+}
+
+.btn-lift {
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s ease, filter 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.btn-lift:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+.btn-lift:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.nav-item {
+  position: relative;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, padding-left 0.18s ease;
+}
+.nav-item:hover {
+  background: rgba(244,239,224,0.10);
+}
+
+.row-hover {
+  transition: background 0.15s ease;
+}
+.row-hover:hover {
+  background: rgba(169,130,43,0.06) !important;
+}
+
+.icon-btn {
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+.icon-btn:hover {
+  background: rgba(31,59,44,0.08);
+  transform: translateY(-1px);
+}
+
+.underline-link {
+  position: relative;
+}
+.underline-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 1.5px;
+  background: currentColor;
+  transition: width 0.2s ease;
+}
+.underline-link:hover::after {
+  width: 100%;
+}
+
+/* Sidebar / mobile drawer */
+.app-sidebar {
+  position: relative;
+}
+.sidebar {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.drawer-backdrop {
+  animation: fadeIn 0.2s ease both;
+}
+
+/* Tablet range: full sidebar still shown, just tighten the content padding a bit */
+@media (min-width: 881px) and (max-width: 1100px) {
+  .app-main {
+    padding: 24px 22px !important;
+  }
+}
+
+/* Very narrow phones: drop the stepper's text labels, keep the numbered circles */
+@media (max-width: 400px) {
+  .stepper-label {
+    display: none;
+  }
+  .stepper-row {
+    gap: 4px !important;
+  }
+}
+
+@media (max-width: 880px) {
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(222px, 80vw) !important;
+    height: 100vh;
+    z-index: 40;
+    transform: translateX(-100%);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
+  .app-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 24px 0 48px rgba(18,32,25,0.28);
+  }
+  .app-main {
+    padding: 74px 16px 40px !important;
+  }
+  .mobile-topbar {
+    display: flex !important;
+  }
+  .drawer-close-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .stat-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  }
+
+  /* Bigger touch targets on touch devices */
+  .icon-btn {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .nav-item {
+    min-height: 44px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .auth-shell {
+    padding: 20px 14px !important;
+    align-items: flex-start !important;
+  }
+  .app-card {
+    padding: 16px 16px !important;
+  }
+  h1 {
+    font-size: 20px !important;
+  }
+  h2 {
+    font-size: 19px !important;
+  }
+  .stat-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .month-chart-row {
+    gap: 3px !important;
+  }
+  .month-chart-row span {
+    font-size: 9px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .stat-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .month-chart-row {
+    overflow-x: auto;
+    min-width: 0;
+    justify-content: flex-start !important;
+  }
+  .month-chart-row > div {
+    min-width: 26px;
+    flex: 0 0 auto !important;
+  }
+}
+
+.table-scroll {
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 480px) {
+  .table-scroll table {
+    min-width: 680px !important;
+  }
+  .table-scroll th,
+  .table-scroll td {
+    padding: 8px 6px !important;
+  }
+  .table-scroll thead th:first-child,
+  .table-scroll tbody td:first-child {
+    padding-left: 12px !important;
+  }
+}
+/* Toasts */
+@keyframes toastPop {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.toast-pop {
+  animation: toastPop 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (max-width: 480px) {
+  .toast-viewport {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+  }
+  .toast-viewport > div {
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* RTL layout support (kept generic for future languages): mirror layout direction, keep numerals/₹ amounts LTR */
+html[dir="rtl"] body {
+  text-align: right;
+}
+html[dir="rtl"] .app-sidebar {
+  border-left: none;
+}
+html[dir="rtl"] .nav-item {
+  text-align: right;
+}
+html[dir="rtl"] .app-sidebar.sidebar {
+  transform: translateX(100%);
+}
+html[dir="rtl"] .app-sidebar.sidebar.open {
+  transform: translateX(0);
+}
+@media (max-width: 880px) {
+  html[dir="rtl"] .app-sidebar {
+    left: auto;
+    right: 0;
+  }
+}
+/* Numbers, currency, phone numbers, dates, and PIN inputs stay LTR even
+   in an RTL layout — this is standard practice for RTL UIs since
+   mixed-direction numerals read better left-to-right */
+.ltr-field, .mono-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.table-fade-right::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 28px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.05));
+  pointer-events: none;
+}
+
+/* Print styles — only the receipt content prints */
+@media print {
+  /* The receipt now renders in its own portal (#receipt-portal), completely
+     outside the React app tree (#root). Printing only ever needs to hide
+     the whole app and show the portal — no per-element visibility
+     overrides required, which is far more reliable across browsers than
+     the old "hide everything, then un-hide the receipt" trick. */
+  #root {
+    display: none !important;
+  }
+  #receipt-portal {
+    display: block !important;
+  }
+  .receipt-modal-backdrop {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  .receipt-modal {
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+  .receipt-actions {
+    display: none !important;
+  }
+}
+@media screen {
+  /* Off-screen but still rendered, so the portal never affects normal layout */
+  #receipt-portal:empty {
+    display: none;
+  }
+}
