@@ -329,6 +329,7 @@ export const translations = {
     "toast.loanRejected": "Loan request rejected",
     "confirm.bulkPaidTitle": "Mark everyone paid?",
     "confirm.bulkPaidBody": "This will record this month's default payment amount for {count} member{plural} who haven't paid yet.",
+    "confirm.bulkPaidConfirm": "Yes, mark paid",
   },
 
   hi: {
@@ -650,6 +651,7 @@ export const translations = {
     "toast.loanRejected": "लोन की रिक्वेस्ट रिजेक्ट की गई",
     "confirm.bulkPaidTitle": "सभी को भुगतान किया चिह्नित करें?",
     "confirm.bulkPaidBody": "यह उन {count} सदस्य के लिए इस महीने की डिफ़ॉल्ट भुगतान राशि दर्ज करेगा जिन्होंने अभी तक भुगतान नहीं किया।",
+    "confirm.bulkPaidConfirm": "हाँ, भुगतान दर्ज करें",
   },
 
 };

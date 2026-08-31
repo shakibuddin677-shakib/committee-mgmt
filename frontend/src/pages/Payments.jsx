@@ -106,6 +106,8 @@ export default function Payments({ session }) {
     const ok = await confirm({
       title: t("confirm.bulkPaidTitle"),
       body: t("confirm.bulkPaidBody", { count: pendingMembers.length, plural: pendingMembers.length === 1 ? "" : "s" }),
+      confirmLabel: t("confirm.bulkPaidConfirm"),
+      danger: false,
     });
     if (!ok) return;
 
