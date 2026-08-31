@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
   BookOpen, ShieldCheck, ChevronRight, ChevronLeft, Plus, Trash2,
-  Check, Copy, Building2, ArrowRight, KeyRound,
+  Check, Copy, Building2, ArrowRight, KeyRound, Eye, EyeOff,
 } from "lucide-react";
 import { apiRequest } from "../api/client";
 import { T, fonts } from "../styles/tokens";
@@ -130,6 +130,7 @@ export default function Onboarding({ onReady }) {
   const [regName, setRegName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [myCommittees, setMyCommittees] = useState(null);
   const [committeeChoice, setCommitteeChoice] = useState("");
@@ -343,14 +344,37 @@ export default function Onboarding({ onReady }) {
             </div>
             <div style={{ marginBottom: 4 }}>
               <Label>{t("onboarding.password")}</Label>
-              <Input
-                className="ltr-field"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                onKeyDown={(e) => e.key === "Enter" && submitAuth()}
-              />
+              <div style={{ position: "relative" }}>
+                <Input
+                  className="ltr-field"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  onKeyDown={(e) => e.key === "Enter" && submitAuth()}
+                  style={{ paddingRight: 40 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  style={{
+                    position: "absolute",
+                    right: 10,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    padding: 4,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    color: T.inkFaint,
+                  }}
+                >
+                  {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                </button>
+              </div>
             </div>
 
             <ErrorBanner message={error} />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserRound, ChevronLeft, KeyRound, MailCheck } from "lucide-react";
+import { UserRound, ChevronLeft, KeyRound, MailCheck, Eye, EyeOff } from "lucide-react";
 import { apiRequest } from "../api/client";
 import { T, fonts } from "../styles/tokens";
 import { Card, Btn, Input, Label, ErrorBanner, Spinner } from "../components/ui";
@@ -9,6 +9,7 @@ export default function MemberLogin({ onReady, onBack }) {
   const [committeeCode, setCommitteeCode] = useState("");
   const [phone, setPhone] = useState("");
   const [pin, setPin] = useState("");
+  const [showPin, setShowPin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { t } = useI18n();
@@ -129,15 +130,38 @@ export default function MemberLogin({ onReady, onBack }) {
             </div>
             <div style={{ marginBottom: 4 }}>
               <Label>{t("login.pin")}</Label>
-              <Input
-                className="ltr-field"
-                type="password"
-                maxLength={4}
-                value={pin}
-                onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
-                placeholder="••••"
-                onKeyDown={(e) => e.key === "Enter" && submit()}
-              />
+              <div style={{ position: "relative" }}>
+                <Input
+                  className="ltr-field"
+                  type={showPin ? "text" : "password"}
+                  maxLength={4}
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
+                  placeholder="••••"
+                  onKeyDown={(e) => e.key === "Enter" && submit()}
+                  style={{ paddingRight: 40 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPin((v) => !v)}
+                  aria-label={showPin ? "Hide PIN" : "Show PIN"}
+                  style={{
+                    position: "absolute",
+                    right: 10,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    padding: 4,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    color: T.inkFaint,
+                  }}
+                >
+                  {showPin ? <EyeOff size={17} /> : <Eye size={17} />}
+                </button>
+              </div>
             </div>
 
             <ErrorBanner message={error} />
