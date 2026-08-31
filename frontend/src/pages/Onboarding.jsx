@@ -279,19 +279,19 @@ export default function Onboarding({ onReady }) {
         <div style={{ textAlign: "center", marginBottom: 20 }}>
           <div
             style={{
-              width: 60,
-              height: 60,
+              width: 64,
+              height: 64,
               borderRadius: "50%",
-              background: `linear-gradient(155deg, ${T.greenSoft}, ${T.greenDeep})`,
+              overflow: "hidden",
               margin: "0 auto 14px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: T.paper,
+              background: T.surface,
               boxShadow: T.shadowGreen,
             }}
           >
-            <BookOpen size={25} />
+            <img src="/logo.png" alt="Committee Management" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <h1 style={{ fontFamily: fonts.display, fontSize: 23, fontWeight: 700, color: T.green, margin: 0, letterSpacing: "-0.01em" }}>
             {t("onboarding.title")}
