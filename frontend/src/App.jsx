@@ -64,13 +64,13 @@ function RoleChoice({ onChoose }) {
       <div className="fade-up" style={{ width: "100%", maxWidth: 400, textAlign: "center" }}>
         <div
           style={{
-            width: 66, height: 66, borderRadius: "50%",
-            background: `linear-gradient(155deg, ${T.greenSoft}, ${T.greenDeep})`,
+            width: 70, height: 70, borderRadius: "50%",
+            overflow: "hidden",
             margin: "0 auto 16px", display: "flex", alignItems: "center", justifyContent: "center",
-            color: T.paper, boxShadow: T.shadowGreen,
+            background: T.surface, boxShadow: T.shadowGreen,
           }}
         >
-          <BookOpen size={26} />
+          <img src="/logo.png" alt="Committee Management" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
         <h1 style={{ fontFamily: fonts.display, fontSize: 26, fontWeight: 700, color: T.green, margin: 0, letterSpacing: "-0.01em" }}>
           {t("role.title")}
