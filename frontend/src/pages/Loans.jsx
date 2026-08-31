@@ -309,8 +309,14 @@ export default function Loans({ session }) {
               style={{ width: 130 }}
             />
             <Input placeholder={t("loans.purpose")} value={form.purpose} onChange={(e) => setForm({ ...form, purpose: e.target.value })} style={{ flex: 1, minWidth: 140 }} />
-            <Input className="ltr-field" type="date" value={form.givenDate} onChange={(e) => setForm({ ...form, givenDate: e.target.value })} style={{ width: 155 }} />
-            <Input className="ltr-field" type="date" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} style={{ width: 155 }} />
+            <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <label style={{ fontSize: 11, color: T.inkFaint, fontWeight: 600, paddingLeft: 2 }}>{t("loans.givenDate")}</label>
+              <Input className="ltr-field" type="date" value={form.givenDate} onChange={(e) => setForm({ ...form, givenDate: e.target.value })} style={{ width: 155 }} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <label style={{ fontSize: 11, color: T.inkFaint, fontWeight: 600, paddingLeft: 2 }}>{t("loans.dueDate")}</label>
+              <Input className="ltr-field" type="date" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} style={{ width: 155 }} />
+            </div>
           </div>
           <p style={{ fontSize: 11.5, color: T.inkFaint, margin: "8px 0 0 0" }}>{t("loans.interestRateHint")}</p>
           <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
@@ -504,20 +510,26 @@ export default function Loans({ session }) {
                         placeholder={t("loans.interestRate")}
                         style={{ width: 130 }}
                       />
-                      <Input
-                        className="ltr-field"
-                        type="date"
-                        value={approveDraft.givenDate}
-                        onChange={(e) => setApproveDraft({ ...approveDraft, givenDate: e.target.value })}
-                        style={{ width: 155 }}
-                      />
-                      <Input
-                        className="ltr-field"
-                        type="date"
-                        value={approveDraft.dueDate}
-                        onChange={(e) => setApproveDraft({ ...approveDraft, dueDate: e.target.value })}
-                        style={{ width: 155 }}
-                      />
+                      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        <label style={{ fontSize: 11, color: T.inkFaint, fontWeight: 600, paddingLeft: 2 }}>{t("loans.givenDate")}</label>
+                        <Input
+                          className="ltr-field"
+                          type="date"
+                          value={approveDraft.givenDate}
+                          onChange={(e) => setApproveDraft({ ...approveDraft, givenDate: e.target.value })}
+                          style={{ width: 155 }}
+                        />
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        <label style={{ fontSize: 11, color: T.inkFaint, fontWeight: 600, paddingLeft: 2 }}>{t("loans.dueDate")}</label>
+                        <Input
+                          className="ltr-field"
+                          type="date"
+                          value={approveDraft.dueDate}
+                          onChange={(e) => setApproveDraft({ ...approveDraft, dueDate: e.target.value })}
+                          style={{ width: 155 }}
+                        />
+                      </div>
                     </div>
                     <div style={{ display: "flex", gap: 8 }}>
                       <Btn variant="ghost" onClick={() => setApprovingId(null)}>{t("common.cancel")}</Btn>
