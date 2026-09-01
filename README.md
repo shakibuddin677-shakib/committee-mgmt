@@ -16,11 +16,6 @@
 
 <br />
 
-<div align="center">
-  <img src="./docs/screenshot-dashboard.png" alt="Committee Management dashboard" width="850" />
-  <p><em>Replace this with a real screenshot or GIF of the live app before publishing.</em></p>
-</div>
-
 <br />
 
 ## ✨ Why this project
