@@ -326,24 +326,37 @@ export default function Dashboard({ session }) {
             ))}
           </div>
         ) : (
-          <div className="month-chart-row" style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 160, paddingTop: 20 }}>
+          <div className="month-chart-row" style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 160, paddingTop: 34 }}>
             {monthArr.map((v, i) => {
               const isHover = hoverMonth === i;
               const isCurrent = i === currentMonthIdx && year === currentYear;
+              // Center the tooltip over its own bar by default, but pull it
+              // inward for the first/last couple of months so it doesn't
+              // spill off the edge of the card on narrow (mobile) screens.
+              const edgeAlign = i <= 1 ? "left" : i >= monthArr.length - 2 ? "right" : "center";
+              const tooltipPositionStyle =
+                edgeAlign === "left"
+                  ? { left: 0, transform: "none" }
+                  : edgeAlign === "right"
+                  ? { right: 0, left: "auto", transform: "none" }
+                  : { left: "50%", transform: "translateX(-50%)" };
               return (
                 <div
                   key={i}
                   onMouseEnter={() => setHoverMonth(i)}
                   onMouseLeave={() => setHoverMonth(null)}
-                  style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, position: "relative" }}
+                  onClick={() => setHoverMonth((h) => (h === i ? null : i))}
+                  style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, position: "relative", cursor: "pointer" }}
                 >
                   {isHover && v > 0 && (
                     <div
-                      className="pop-in"
+                      className="pop-in month-tooltip"
                       style={{
-                        position: "absolute", bottom: "100%", marginBottom: 4,
+                        position: "absolute", bottom: "100%", marginBottom: 6,
+                        ...tooltipPositionStyle,
                         background: T.greenDeep, color: T.paper, fontSize: 11, fontFamily: fonts.mono,
-                        padding: "3px 7px", borderRadius: 5, whiteSpace: "nowrap", zIndex: 2,
+                        padding: "4px 8px", borderRadius: 6, whiteSpace: "nowrap", zIndex: 5,
+                        boxShadow: "0 4px 10px rgba(0,0,0,0.18)",
                       }}
                     >
                       ₹{v.toLocaleString("en-IN")}
