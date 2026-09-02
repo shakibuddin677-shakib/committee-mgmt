@@ -304,7 +304,7 @@ export default function Dashboard({ session }) {
       )}
 
       <Card hover>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18, flexWrap: "wrap", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10, flexWrap: "wrap", gap: 10 }}>
           <div>
             <p style={{ fontFamily: fonts.display, fontSize: 17, fontWeight: 600, color: T.green, margin: 0 }}>
               {t("dashboard.monthlyCollection")} — {year}
@@ -319,6 +319,26 @@ export default function Dashboard({ session }) {
           </div>
         </div>
 
+        {/* Selected-month readout — a normal, full-width block (not a
+            floating tooltip glued to a narrow bar) so it can never overlap
+            neighbouring bars or labels, no matter how narrow the screen is.
+            Always reserves its line height so the chart doesn't jump when a
+            bar is tapped. */}
+        <div
+          style={{
+            minHeight: 30, display: "flex", alignItems: "center", justifyContent: "center",
+            marginBottom: 10, borderRadius: 8,
+            background: hoverMonth !== null && monthArr[hoverMonth] > 0 ? T.greenDeep : "transparent",
+            transition: "background 0.15s ease",
+          }}
+        >
+          {hoverMonth !== null && monthArr[hoverMonth] > 0 && (
+            <p className="pop-in" style={{ margin: 0, padding: "5px 14px", fontSize: 13, fontFamily: fonts.mono, color: T.paper, fontWeight: 600 }}>
+              {monthNames[hoverMonth]} {year} · ₹{monthArr[hoverMonth].toLocaleString("en-IN")}
+            </p>
+          )}
+        </div>
+
         {chartLoading ? (
           <div className="month-chart-row" style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 150 }}>
             {Array.from({ length: 12 }).map((_, i) => (
@@ -326,42 +346,18 @@ export default function Dashboard({ session }) {
             ))}
           </div>
         ) : (
-          <div className="month-chart-row" style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 160, paddingTop: 34 }}>
+          <div className="month-chart-row" style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 160 }}>
             {monthArr.map((v, i) => {
               const isHover = hoverMonth === i;
               const isCurrent = i === currentMonthIdx && year === currentYear;
-              // Center the tooltip over its own bar by default, but pull it
-              // inward for the first/last couple of months so it doesn't
-              // spill off the edge of the card on narrow (mobile) screens.
-              const edgeAlign = i <= 1 ? "left" : i >= monthArr.length - 2 ? "right" : "center";
-              const tooltipPositionStyle =
-                edgeAlign === "left"
-                  ? { left: 0, transform: "none" }
-                  : edgeAlign === "right"
-                  ? { right: 0, left: "auto", transform: "none" }
-                  : { left: "50%", transform: "translateX(-50%)" };
               return (
                 <div
                   key={i}
                   onMouseEnter={() => setHoverMonth(i)}
                   onMouseLeave={() => setHoverMonth(null)}
-                  onClick={() => setHoverMonth((h) => (h === i ? null : i))}
-                  style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, position: "relative", cursor: "pointer" }}
+                  onClick={() => setHoverMonth(i)}
+                  style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer" }}
                 >
-                  {isHover && v > 0 && (
-                    <div
-                      className="pop-in month-tooltip"
-                      style={{
-                        position: "absolute", bottom: "100%", marginBottom: 6,
-                        ...tooltipPositionStyle,
-                        background: T.greenDeep, color: T.paper, fontSize: 11, fontFamily: fonts.mono,
-                        padding: "4px 8px", borderRadius: 6, whiteSpace: "nowrap", zIndex: 5,
-                        boxShadow: "0 4px 10px rgba(0,0,0,0.18)",
-                      }}
-                    >
-                      ₹{v.toLocaleString("en-IN")}
-                    </div>
-                  )}
                   <div
                     style={{
                       width: "100%",

@@ -258,14 +258,9 @@ textarea:focus {
   }
   .month-chart-row {
     gap: 3px !important;
-    padding-top: 30px !important;
   }
   .month-chart-row span {
     font-size: 9px !important;
-  }
-  .month-tooltip {
-    font-size: 9.5px !important;
-    padding: 3px 6px !important;
   }
 }
 
