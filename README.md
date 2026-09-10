@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&amp;color=0%3A1a1814%2C100%3A2b6e4f&amp;height=180&amp;section=header&amp;text=Committee%20Management&amp;fontSize=60&amp;fontColor=ffffff&amp;fontAlignY=35&amp;desc=A%20bilingual%20BC%20%2F%20chit-fund%20savings%20%26%20loan%20platform&amp;descAlignY=55&amp;descSize=18" alt="Committee Management banner"/> 
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1814,100:2b6e4f&height=180&section=header&text=Committee%20Management&fontSize=60&fontColor=ffffff&fontAlignY=35&desc=A%20bilingual%20BC%20%2F%20chit-fund%20savings%20%26%20loan%20platform&descAlignY=55&descSize=18" alt="Committee Management banner"/>
 
 <br/>
 
